@@ -1,0 +1,19 @@
+<%= form_with(model: user, local: true) do |f| %>
+<%= render 'shared/errors', instance: @user %>
+
+  <div class="field">
+    <%= f.label :username %>
+    <br>
+    <%= f.text_field :username %>
+  </div>
+<br>
+  <div class="field">
+    <%= f.label :password %>
+    <br>
+    <%= f.password_field :password %>
+  </div>
+<br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
