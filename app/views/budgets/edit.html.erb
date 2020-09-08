@@ -1,0 +1,7 @@
+<br><br>
+<h1>Edit <%= @budget.name %> budget</h1>
+<div>
+<%= render 'form', budget: @budget %>
+</div>
+<br>
+<%= link_to 'Delete', budget_path(@budget), method:'delete' %>

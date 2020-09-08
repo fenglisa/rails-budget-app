@@ -7,3 +7,13 @@
 </ul>
 
 <%= link_to 'Add new card', new_card_url %>
+<br><br>
+
+<p>These are your budgets</p>
+<ul>
+  <% @user.budgets.each do |b| %>
+  <li><%= link_to b.name, budget_path(b) %></li>
+  <% end %>
+</ul>
+
+<%= link_to 'Add new budget', new_budget_url %>

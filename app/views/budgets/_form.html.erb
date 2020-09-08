@@ -1,0 +1,25 @@
+<%= form_with(model: budget, local: true) do |f| %>
+<%= render 'shared/errors', instance: @budget %>
+
+  <div class="field">
+    <%= f.label :name %>
+    <br>
+    <%= f.text_field :name %>
+  </div>
+<br>
+  <div class="field">
+    <%= f.label :amount %>
+    <br>
+    <%= f.text_field :amount %>
+  </div>
+<br>
+  <div class="field">
+    <%= f.label :month, 'For the month of:' %>
+    <br>
+    <%= f.select :month, ['January','February','March','April','May','June','July','August','September','October','November','December'] %>
+  </div>
+<br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
