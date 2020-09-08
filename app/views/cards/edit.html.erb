@@ -1,0 +1,7 @@
+<br><br>
+<h1>Edit <%= @card.name %></h1>
+<div>
+<%= render 'form', card: @card %>
+</div>
+<br>
+<%= link_to 'Delete', card_path(@card), method:'delete' %>
