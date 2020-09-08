@@ -2,3 +2,5 @@
 <p><%= @card.last_digits %></p>
 <br>
 <%= link_to 'Edit', edit_card_url %>
+<br>
+<p><%= render 'shared/purchase_list', parent: @card %></p>
