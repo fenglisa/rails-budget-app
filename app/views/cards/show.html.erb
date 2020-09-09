@@ -1,6 +1,11 @@
 <h2><%= @card.name %></h2>
 <p><%= @card.last_digits %></p>
-<br>
 <%= link_to 'Edit', edit_card_url %>
-<br>
-<p><%= render 'shared/purchase_list', parent: @card %></p>
+<br><br>
+<p>Recent purchases with this card</p>
+<ul>
+  <% @card.purchases.last(3).each do |p| %>
+  <li><%= link_to p.amount, edit_purchase_url(p.id) %></li>
+  <% end %>
+</ul>
+<%= link_to 'See all purchases', card_purchases_path(@card) %>

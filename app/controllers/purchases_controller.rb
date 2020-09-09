@@ -1,13 +1,19 @@
 class PurchasesController < ApplicationController
+  def index
+    @card = Card.find_by_id(params[:card_id])
+  end
+
   def new
     @user = current_user
+    @card = Card.find_by_id(params[:card_id])
     @purchase = Purchase.new
   end
 
   def create
     @purchase = current_user.purchases.build(purchase_params)
+    @purchase.card_id = params[:card_id]
     if @purchase.save
-      redirect_to home_path
+      redirect_to @purchase.card#, notice: "Purchase logged"
     else
       render :new
     end
@@ -24,7 +30,7 @@ class PurchasesController < ApplicationController
   def update
     @purchase = current_user.purchases.find_by_id(params[:id])
     if @purchase.update!(purchase_params)
-      redirect_to home_path
+      redirect_to @purchase.card
     else
       render :edit
     end
@@ -38,6 +44,6 @@ class PurchasesController < ApplicationController
 
   private
   def purchase_params
-    params.require(:purchase).permit(:date, :amount, :card_id, :budget_id, :user_id)
+    params.require(:purchase).permit(:date, :amount, :budget_id)
   end
 end

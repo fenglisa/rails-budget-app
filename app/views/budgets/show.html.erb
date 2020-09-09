@@ -1,5 +1,4 @@
 <h2><%= @budget.month %> <%= @budget.name %> budget: <%= @budget.amount %></h2>
-<br>
 <%= link_to 'Edit', edit_budget_url %>
-<br>
+<br><br>
 <p><%= render 'shared/purchase_list', parent: @budget %></p>
