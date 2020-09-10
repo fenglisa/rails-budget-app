@@ -1,0 +1,22 @@
+<br><br>
+<div>
+<%= form_for [@card, @benefit] do |f| %>
+<%= render 'shared/errors', instance: @benefit %>
+
+  <div class="field">
+    <%= f.label :cash_back %>
+    <br>
+    <%= f.select :cash_back, @benefit.percentage_cash_back, prompt: 'Please select %' %>
+  </div>
+<br>
+  <div class="field">
+    <%= f.label :category %>
+    <br>
+    <%= f.select :category, @benefit.categories, prompt: 'Please select' %>
+  </div>
+<br>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+</div>
