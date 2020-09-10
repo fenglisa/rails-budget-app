@@ -9,6 +9,7 @@ class BenefitsController < ApplicationController
     @benefit = current_user.benefits.build(benefit_params)
     @benefit.card_id = params[:card_id]
     if @benefit.save
+      new_budget_category
       redirect_to @benefit.card
     else
       render :new
