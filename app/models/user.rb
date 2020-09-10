@@ -5,6 +5,7 @@ class User < ApplicationRecord
   validates_with UsernameValidator
   has_many :cards
   has_many :purchases, through: :cards
+  has_many :benefits, through: :cards
   has_many :budgets
 
 

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :budgets
   resources :cards do
-    resources :benefits, shallow: true, except: [:show]
+    resources :benefits, shallow: true, except: [:show, :index]
     resources :purchases, shallow: true, except: [:show]
   end
   resources :users, except: [:new, :show]

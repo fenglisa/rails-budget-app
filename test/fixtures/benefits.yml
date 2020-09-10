@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  cash_back: 1.5
+  category: MyString
+  card: one
+
+two:
+  cash_back: 1.5
+  category: MyString
+  card: two

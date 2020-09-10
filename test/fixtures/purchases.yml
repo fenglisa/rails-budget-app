@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  amount: 1.5
+  date: 2020-09-08
+  budget: one
+  card: one
+
+two:
+  amount: 1.5
+  date: 2020-09-08
+  budget: two
+  card: two

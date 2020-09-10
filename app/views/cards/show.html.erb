@@ -1,8 +1,13 @@
-<h2><%= @card.name %></h2>
-<p><%= @card.last_digits %></p>
-<%= link_to 'Edit', edit_card_url %>
+<h2><%= @card.name %>---<%= @card.last_digits %></h2>
+<p>Benefits with this card:</p>
+<ul>
+  <% @card.benefits.each do |b| %>
+  <li><%= link_to b.cash_back, edit_benefit_path(b.id) %>% cashback on <%= b.category %></li>
+  <% end %>
+</ul>
+<%= link_to 'Edit Card', edit_card_url %> <%= link_to 'Add Benefits', new_card_benefit_path(@card) %>
 <br><br>
-<p>Recent purchases with this card</p>
+<p>Recent purchases with this card:</p>
 <ul>
   <% @card.purchases.last(3).each do |p| %>
   <li><%= link_to p.amount, edit_purchase_url(p.id) %></li>

@@ -11,7 +11,7 @@
 
   <body>
     <% if logged_in %>
-      <%= link_to 'Sign out', '/signout',  method: :delete %>
+      <%= link_to 'Home', '/home' %> <%= link_to 'Sign out', '/signout',  method: :delete %>
     <% end %>
     <%= yield %>
   </body>
