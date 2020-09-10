@@ -12,7 +12,7 @@
   <div class="field">
     <%= f.label :category %>
     <br>
-    <%= f.select :category, @benefit.categories, prompt: 'Please select' %>
+    <%= f.select :category, @benefit.categories, disabled: @benefit.disabled_categories(@card), prompt: 'Please select' %>
   </div>
 <br>
   <div class="actions">

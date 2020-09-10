@@ -7,6 +7,12 @@ class Benefit < ApplicationRecord
     ['Gas','Groceries','Restaurants','Other']
   end
 
+  def disabled_categories(card)
+    card_benefits = []
+    card.benefits.each{|b| card_benefits << b.category}
+    card_benefits & categories
+  end
+
   def percentage_cash_back
     [1,1.5,2,3,5,6]
   end

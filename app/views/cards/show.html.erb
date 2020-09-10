@@ -7,10 +7,16 @@
 </ul>
 <%= link_to 'Edit Card', edit_card_url %> <%= link_to 'Add Benefits', new_card_benefit_path(@card) %>
 <br><br>
+<p>This card has earned:</p>
+<ul><% budget_cash_back(@card).each do |b| %>
+    <li>$<%= b[1] %> on <%= b[0] %></li>
+    <% end %>
+</ul>
+<br>
 <p>Recent purchases with this card:</p>
 <ul>
   <% @card.purchases.last(3).each do |p| %>
-  <li><%= link_to p.amount, edit_purchase_url(p.id) %></li>
+  <li>$<%= link_to p.amount, edit_purchase_url(p.id) %></li>
   <% end %>
 </ul>
 <%= link_to 'See all purchases', card_purchases_path(@card) %>

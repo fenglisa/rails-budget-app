@@ -5,7 +5,4 @@ class Budget < ApplicationRecord
   has_many :purchases
   has_many :cards, through: :purchases
 
-  def budget_cards
-    @budget.cards.uniq
-  end
 end
