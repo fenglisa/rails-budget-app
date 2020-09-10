@@ -22,7 +22,7 @@ class BudgetsController < ApplicationController
 
   def update
     @budget = current_user.budgets.find_by_id(params[:id])
-    if @budget.update!(budget_params)
+    if @budget.update(budget_params)
       redirect_to home_path
     else
       render :edit

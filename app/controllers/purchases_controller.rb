@@ -4,12 +4,12 @@ class PurchasesController < ApplicationController
   end
 
   def new
-    @user = current_user
     @card = Card.find_by_id(params[:card_id])
     @purchase = Purchase.new
   end
 
   def create
+    @card = Card.find_by_id(params[:card_id])
     @purchase = current_user.purchases.build(purchase_params)
     @purchase.card_id = params[:card_id]
     if @purchase.save
@@ -19,17 +19,13 @@ class PurchasesController < ApplicationController
     end
   end
 
-  def show
-    @purchase = current_user.purchases.find_by_id(params[:id])
-  end
-
   def edit
     @purchase = current_user.purchases.find_by_id(params[:id])
   end
 
   def update
     @purchase = current_user.purchases.find_by_id(params[:id])
-    if @purchase.update!(purchase_params)
+    if @purchase.update(purchase_params)
       redirect_to @purchase.card
     else
       render :edit

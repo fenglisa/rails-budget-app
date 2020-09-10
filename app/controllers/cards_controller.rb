@@ -22,7 +22,7 @@ class CardsController < ApplicationController
 
   def update
     @card = current_user.cards.find_by_id(params[:id])
-    if @card.update!(card_params)
+    if @card.update(card_params)
       redirect_to home_path
     else
       render :edit
