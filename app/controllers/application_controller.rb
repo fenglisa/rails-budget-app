@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in, :new_budget_category, :budget_cards, :sort_purchases_by_card, :cash_back_earned, :card_budgets, :budget_cash_back
+  helper_method :current_user, :logged_in, :new_budget_category, :budget_cards, :sort_purchases_by_card, :cash_back_earned, :card_budgets, :budget_cash_back, :purchase_total
   before_action :redirect_if_logged_out
 
   def current_user
@@ -63,6 +63,20 @@ class ApplicationController < ActionController::Base
       end
     end
     budget_earnings
+  end
+
+  def purchase_total(parent)
+    parent_purchases = []
+    if parent == @card
+      current_user.purchases.each do |p|
+        parent_purchases << p.amount if p.card_id == parent.id
+      end
+    elsif parent == @budget
+      current_user.purchases.each do |p|
+        parent_purchases << p.amount if p.budget_id == parent.id
+      end
+    end
+    parent_purchases.sum
   end
 
 end

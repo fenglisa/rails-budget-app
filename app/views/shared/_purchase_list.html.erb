@@ -1,6 +1,6 @@
-<p>Purchases for this <%= parent.class.name.downcase %></p>
+<h2>Purchase total for this <%= parent.class.name.downcase %>: $<%= purchase_total(parent) %></h2>
 <ul>
   <% parent.purchases.each do |p| %>
-  <li><%= link_to p.amount, edit_purchase_url(p.id) %></li>
+  <li>$<%= link_to p.amount, edit_purchase_url(p.id) %></li>
   <% end %>
 </ul>
