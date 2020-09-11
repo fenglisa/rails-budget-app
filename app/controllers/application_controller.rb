@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   def new_budget_category
     budget_names = []
     current_user.budgets.each {|b| budget_names << b.name}
-    if params[:benefit][:category] != "Other" && !budget_names.include?(params[:benefit][:category])
+    if params[:benefit][:category] != "All other purchases" && !budget_names.include?(params[:benefit][:category])
       current_user.budgets.build(name: params[:benefit][:category], amount: 0, month: Date.today.strftime("%B '%y")).save
     end
   end
@@ -42,6 +42,9 @@ class ApplicationController < ActionController::Base
       if card_benefits_categories.include?(budget.name)
         benefit = c.benefits.find_by(category: (budget.name))
         cash_back_earned << ((benefit.cash_back)/100)*((sort_purchases_by_card(budget, c)).sum)
+      elsif card_benefits_categories.include?('All other purchases')
+        benefit = c.benefits.find_by(category: 'All other purchases')
+        cash_back_earned << ((benefit.cash_back)/100)*((sort_purchases_by_card(budget, c)).sum)
       end
     end
     cash_back_earned.sum.round(2)
@@ -58,6 +61,10 @@ class ApplicationController < ActionController::Base
     card_budgets(card).each do |b|
       if card_benefits_categories.include?(b.name)
         benefit = card.benefits.find_by(category: (b.name))
+        cash_back_earned = (((benefit.cash_back)/100)*((sort_purchases_by_card(b, card)).sum)).round(2)
+        budget_earnings[b.name] = cash_back_earned
+      elsif card_benefits_categories.include?('All other purchases')
+        benefit = card.benefits.find_by(category: 'All other purchases')
         cash_back_earned = (((benefit.cash_back)/100)*((sort_purchases_by_card(b, card)).sum)).round(2)
         budget_earnings[b.name] = cash_back_earned
       end

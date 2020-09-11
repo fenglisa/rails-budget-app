@@ -1,5 +1,7 @@
 class Budget < ApplicationRecord
   validates :name, presence: true
+  include ActiveModel::Validations
+  validates_with BudgetNameValidator
   validates :amount, numericality: true
   belongs_to :user
   has_many :purchases

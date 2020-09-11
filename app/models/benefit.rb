@@ -4,7 +4,7 @@ class Benefit < ApplicationRecord
   belongs_to :card
 
   def categories
-    ['Gas','Groceries','Restaurants','Other']
+    ['Gas','Groceries','Restaurants','All other purchases']
   end
 
   def disabled_categories(card)
