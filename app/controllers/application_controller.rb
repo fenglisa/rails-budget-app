@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
   def budget_cash_back(card)
     card_benefits_categories = []
     card.benefits.each {|b| card_benefits_categories << b.category}
+    other_purchases = []
     budget_earnings = {}
     card_budgets(card).each do |b|
       if card_benefits_categories.include?(b.name)
@@ -65,9 +66,12 @@ class ApplicationController < ActionController::Base
         budget_earnings[b.name] = cash_back_earned
       elsif card_benefits_categories.include?('All other purchases')
         benefit = card.benefits.find_by(category: 'All other purchases')
-        cash_back_earned = (((benefit.cash_back)/100)*((sort_purchases_by_card(b, card)).sum)).round(2)
-        budget_earnings[b.name] = cash_back_earned
+        other_purchases << (((benefit.cash_back)/100)*((sort_purchases_by_card(b, card)).sum)).round(2)
       end
+    end
+    if card_benefits_categories.include?('All other purchases')
+      cash_back_earned = other_purchases.sum.round(2)
+      budget_earnings['All other purchases'] = cash_back_earned
     end
     budget_earnings
   end
@@ -83,7 +87,7 @@ class ApplicationController < ActionController::Base
         parent_purchases << p.amount if p.budget_id == parent.id
       end
     end
-    parent_purchases.sum
+    parent_purchases.sum.round(2)
   end
 
   def current_budgets

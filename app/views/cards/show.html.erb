@@ -1,5 +1,5 @@
 <h2><%= @card.name %>---<%= @card.last_digits %></h2>
-<p>Benefits with this card:</p>
+<h4>Benefits with this card:</h4>
 <ul>
   <% @card.benefits.each do |b| %>
   <li><%= link_to b.cash_back, edit_benefit_path(b.id) %>% cashback on <%= b.category %></li>
@@ -7,16 +7,16 @@
 </ul>
 <%= link_to 'Edit Card', edit_card_url %> <%= link_to 'Add Benefits', new_card_benefit_path(@card) %>
 <br><br>
-<p>This card has earned:</p>
+<h4>This card has earned:</h4>
 <ul><% budget_cash_back(@card).each do |b| %>
     <li>$<%= b[1] %> on <%= b[0] %></li>
     <% end %>
 </ul>
 <br>
-<p>Recent purchases with this card:</p>
+<h4>Recent purchases with this card:</h4>
 <ul>
-  <% @card.purchases.last(3).each do |p| %>
-  <li>$<%= link_to p.amount, edit_purchase_url(p.id) %></li>
+  <% @card.purchases.by_most_recent_date.first(3).each do |p| %>
+  <li>$<%= link_to p.amount, edit_purchase_url(p.id) %> in <%= link_to p.budget.name, budget_url(p.budget) %></li>
   <% end %>
 </ul>
 <%= link_to 'See all purchases', card_purchases_path(@card) %>
