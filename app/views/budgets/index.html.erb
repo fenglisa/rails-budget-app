@@ -1,0 +1,6 @@
+<h2>All your budgets</h2>
+<ul>
+  <% current_user.budgets.each do |b| %>
+  <li><%= b.month %> <%= link_to b.name, budget_url(b.id) %> budget: $<%= b.amount %></li>
+  <% end %>
+</ul>

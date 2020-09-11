@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in, :new_budget_category, :budget_cards, :sort_purchases_by_card, :cash_back_earned, :card_budgets, :budget_cash_back, :purchase_total
+  helper_method :current_user, :logged_in, :new_budget_category, :budget_cards, :sort_purchases_by_card, :cash_back_earned, :card_budgets, :budget_cash_back, :purchase_total, :current_budgets
   before_action :redirect_if_logged_out
 
   def current_user
@@ -20,7 +20,7 @@ class ApplicationController < ActionController::Base
     budget_names = []
     current_user.budgets.each {|b| budget_names << b.name}
     if params[:benefit][:category] != "Other" && !budget_names.include?(params[:benefit][:category])
-      current_user.budgets.build(name: params[:benefit][:category], amount: 0, month: Date.today.strftime('%B')).save
+      current_user.budgets.build(name: params[:benefit][:category], amount: 0, month: Date.today.strftime("%B '%y")).save
     end
   end
 
@@ -77,6 +77,12 @@ class ApplicationController < ActionController::Base
       end
     end
     parent_purchases.sum
+  end
+
+  def current_budgets
+    budgets_this_month = []
+    current_user.budgets.each{|b| budgets_this_month << b if b.month.include?(Date.today.strftime("%B '%y"))}
+    budgets_this_month
   end
 
 end

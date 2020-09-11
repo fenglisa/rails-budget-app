@@ -1,5 +1,5 @@
 <h1>Welcome <%= @user.username %>!</h1>
-<p>These are your cards</p>
+<h3>These are your cards</h3>
 <ul>
   <% @user.cards.each do |c| %>
   <li><%= link_to c.name, card_path(c) %></li>
@@ -9,11 +9,11 @@
 <%= link_to 'Add new card', new_card_url %>
 <br><br>
 
-<p>These are your budgets</p>
+<h3>These are your budgets for this month</h3>
 <ul>
-  <% @user.budgets.each do |b| %>
+  <% current_budgets.each do |b| %>
   <li><%= link_to b.name, budget_path(b) %></li>
   <% end %>
 </ul>
 
-<%= link_to 'Add new budget', new_budget_url %>
+<%= link_to 'Add new budget', new_budget_url %> <%= link_to 'See past budgets', budgets_path %>

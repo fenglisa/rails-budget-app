@@ -1,4 +1,7 @@
 class BudgetsController < ApplicationController
+  def index
+  end
+
   def new
     @budget = Budget.new
   end
