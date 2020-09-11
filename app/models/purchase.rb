@@ -3,10 +3,6 @@ class Purchase < ApplicationRecord
   validates :date, presence: true
   belongs_to :budget
   belongs_to :card
+  scope :by_most_recent_date, -> {order(date: :desc)}
 
-  def purchases_by_date
-    current_user.purchases.sort_by do |p|
-      p.date
-    end
-  end
 end

@@ -1,6 +1,6 @@
 <h2>Purchase total for this <%= parent.class.name.downcase %>: $<%= purchase_total(parent) %></h2>
 <ul>
-  <% parent.purchases.each do |p| %>
+  <% parent.purchases.by_most_recent_date.each do |p| %>
   <li>$<%= link_to p.amount, edit_purchase_url(p.id) %> - <%= p.date.strftime('%b, %d %Y') %></li>
   <% end %>
 </ul>
