@@ -13,5 +13,6 @@ class Budget < ApplicationRecord
     months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     months.map{|m| m << year}
   end
+  
 
 end

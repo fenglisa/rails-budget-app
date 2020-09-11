@@ -10,7 +10,7 @@ module PurchasesHelper
         parent_purchases << p.amount if p.budget_id == parent.id
       end
     end
-    parent_purchases.sum
+    parent_purchases.sum.round(2)
   end
 
   def purchases_by_date
