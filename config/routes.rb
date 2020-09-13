@@ -12,6 +12,8 @@ Rails.application.routes.draw do
   get '/signup', to: 'users#new', as: 'signup'
   get '/home', to: 'users#show'
 
+  get '/auth/google_oauth2/callback', to: 'sessions#google'
+
   root to: 'static#index'
 
 end

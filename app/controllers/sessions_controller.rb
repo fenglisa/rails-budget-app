@@ -12,8 +12,21 @@ class SessionsController < ApplicationController
     end
   end
 
+  def google
+    u = User.find_or_create_with_oauth(auth)
+    session[:user_id] = u.id
+
+     redirect_to home_path
+  end
+
   def destroy
     session.clear
     redirect_to root_path
+  end
+
+  private
+
+  def auth
+    request.env['omniauth.auth']
   end
 end

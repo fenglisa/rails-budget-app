@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_08_142034) do
+ActiveRecord::Schema.define(version: 2020_09_13_141906) do
+
+  create_table "benefits", force: :cascade do |t|
+    t.float "cash_back"
+    t.string "category"
+    t.integer "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["card_id"], name: "index_benefits_on_card_id"
+  end
 
   create_table "budgets", force: :cascade do |t|
     t.string "name"
@@ -31,13 +40,28 @@ ActiveRecord::Schema.define(version: 2020_09_08_142034) do
     t.index ["user_id"], name: "index_cards_on_user_id"
   end
 
+  create_table "purchases", force: :cascade do |t|
+    t.float "amount"
+    t.date "date"
+    t.integer "budget_id", null: false
+    t.integer "card_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["budget_id"], name: "index_purchases_on_budget_id"
+    t.index ["card_id"], name: "index_purchases_on_card_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "uid"
   end
 
+  add_foreign_key "benefits", "cards"
   add_foreign_key "budgets", "users"
   add_foreign_key "cards", "users"
+  add_foreign_key "purchases", "budgets"
+  add_foreign_key "purchases", "cards"
 end
