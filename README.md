@@ -1,6 +1,6 @@
-# A Sinatra Budgeting App
-### Budget your way!
-Keeps track of your purchases and your remaining budget through the months.  
+# BeneBudget
+### A Rails Budgeting App
+Keeps track of your purchases and cashback benefits through the months.  
 
 ## Installation
 
