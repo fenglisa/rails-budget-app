@@ -11,8 +11,8 @@
 
 <h3>These are your budgets for this month:</h3>
 <ul>
-  <% current_budgets.each do |b| %>
-  <li><%= link_to b.name.capitalize, budget_path(b) %></li>
+  <% @user.budgets.current_budgets.each do |b| %>
+  <li><%= link_to b.name, budget_path(b) %></li>
   <% end %>
 </ul>
 
