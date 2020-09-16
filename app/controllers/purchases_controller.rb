@@ -13,7 +13,7 @@ class PurchasesController < ApplicationController
     @purchase = current_user.purchases.build(purchase_params)
     @purchase.card_id = params[:card_id]
     if @purchase.save
-      redirect_to @purchase.card#, notice: "Purchase logged"
+      redirect_to @purchase.card
     else
       render :new
     end

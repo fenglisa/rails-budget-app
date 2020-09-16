@@ -26,10 +26,4 @@ module BudgetsHelper
     cash_back_earned.sum.round(2)
   end
 
-  def current_budgets
-    budgets_this_month = []
-    current_user.budgets.each{|b| budgets_this_month << b if b.month.include?(Date.today.strftime("%B '%y"))}
-    budgets_this_month
-  end
-
 end
