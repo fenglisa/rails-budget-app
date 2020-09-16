@@ -1,7 +1,8 @@
 class Budget < ApplicationRecord
   validates :name, presence: true
-  #include ActiveModel::Validations
-  # validates_with BudgetNameValidator
+  before_validation :normalize_name, on: [ :create, :update ]
+  include ActiveModel::Validations
+  validates_with UniqueBudgetValidator
   validates :amount, numericality: true
   belongs_to :user
   has_many :purchases
@@ -13,6 +14,10 @@ class Budget < ApplicationRecord
     months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     months.map{|m| m << year}
   end
-  
+
+  private
+  def normalize_name
+    self.name = name.downcase.titleize
+  end
 
 end
