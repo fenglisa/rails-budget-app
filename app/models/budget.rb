@@ -1,9 +1,9 @@
 class Budget < ApplicationRecord
   validates :name, presence: true
-  before_validation :normalize_name, on: [ :create, :update ]
-  include ActiveModel::Validations
-  validates_with UniqueBudgetValidator
   validates :amount, numericality: true
+
+  before_validation :normalize_name
+
   belongs_to :user
   has_many :purchases
   has_many :cards, through: :purchases
@@ -15,9 +15,22 @@ class Budget < ApplicationRecord
     months.map{|m| m << year}
   end
 
+  def unique_budget?(user,params)
+    budget_names = []
+    user.budgets.current_budgets.each do |b|
+      budget_names << b.name
+    end
+    if budget_names.include?((params[:name]).capitalize)
+      false
+    else
+      true
+    end
+  end
+
   private
   def normalize_name
     self.name = name.downcase.titleize
   end
+
 
 end

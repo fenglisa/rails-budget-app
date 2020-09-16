@@ -8,9 +8,10 @@ class BudgetsController < ApplicationController
 
   def create
     @budget = current_user.budgets.build(budget_params)
-    if @budget.save
+    if @budget.unique_budget?(current_user,budget_params) && @budget.save
       redirect_to home_path
     else
+      @error = 'This budget already exists'
       render :new
     end
   end
@@ -25,9 +26,10 @@ class BudgetsController < ApplicationController
 
   def update
     @budget = current_user.budgets.find_by_id(params[:id])
-    if @budget.update(budget_params)
+    if @budget.unique_budget?(current_user,budget_params) && @budget.update(budget_params)
       redirect_to home_path
     else
+      @error = 'This budget already exists'
       render :edit
     end
   end

@@ -9,3 +9,9 @@
   </ul>
 </div>
 <% end %>
+
+<% if @error%>
+  <div id="error_explanation">
+    <p><%= @error %></p>
+  </div>
+<% end %>

@@ -18,7 +18,7 @@
   <div class="field">
     <%= f.label :budget_id, 'For which budget?' %>
     <br>
-    <%= f.select :budget_id, current_budgets.map{|b| [b.name.capitalize, b.id] } %>
+    <%= f.select :budget_id, current_user.budgets.current_budgets.map{|b| [b.name, b.id] } %>
   </div>
 <br>
   <div class="actions">

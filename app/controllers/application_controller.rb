@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
 
   def new_budget_category
     budget_names = []
-    current_user.budgets.each {|b| budget_names << b.name.capitalize}
+    current_user.budgets.current_budgets.each {|b| budget_names << b.name}
     if params[:benefit][:category] != "All other purchases" && !budget_names.include?(params[:benefit][:category])
       current_user.budgets.build(name: params[:benefit][:category], amount: 0, month: Date.today.strftime("%B '%y")).save
     end
