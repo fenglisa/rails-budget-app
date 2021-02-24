@@ -1,4 +1,6 @@
 module CardsHelper
+
+# return unique budgets per card
   def card_budgets(card)
     card.budgets.uniq
   end
@@ -9,6 +11,7 @@ module CardsHelper
     card_purchases
   end
 
+# calculates cashback earned per card
   def budget_cash_back(card)
     card_benefits_categories = []
     card.benefits.each {|b| card_benefits_categories << b.category}
