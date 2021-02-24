@@ -1,11 +1,13 @@
 module BudgetsHelper
 
+# formatting month and year for budget names
   def current_budget_months
     year = Date.today.strftime(" '%y")
     months = ['January','February','March','April','May','June','July','August','September','October','November','December']
     months.map{|m| m << year}
   end
 
+# return unique cards per budget
   def budget_cards(budget)
     budget.cards.uniq
   end
@@ -16,6 +18,7 @@ module BudgetsHelper
     card_purchases
   end
 
+# calculates cashback earned per budget
   def cash_back_earned(budget)
     cash_back_earned = []
     budget_cards(budget).each do |c|
