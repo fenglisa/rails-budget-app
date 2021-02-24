@@ -8,6 +8,7 @@ class Budget < ApplicationRecord
   has_many :cards, through: :purchases
   scope :current_budgets, -> {where(month: Date.today.strftime("%B '%y"))}
 
+# check if user already has this budget named
   def unique_budget?(user,params)
     budget_names = []
     user.budgets.current_budgets.each do |b|
